@@ -1,0 +1,4 @@
+.env
+.DS_Store
+mongoose add and read file
+node_modules/
