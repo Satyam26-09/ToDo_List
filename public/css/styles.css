@@ -5,9 +5,22 @@ html {
   font-family: 'helvetica neue';
 }
 
+.headers{
+  color: #57575d;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+p.headers{
+  color: #252526;
+}
+
 h1 {
   color: #fff;
   padding: 10px;
+}
+
+body{
+  background-color: transparent;
 }
 
 .box {
@@ -93,4 +106,28 @@ footer {
   color: white;
   color: rgba(0, 0, 0, 0.5);
   text-align: center;
+}
+
+.btn{
+  width: fit-content;
+}
+.btn-google{
+  width: auto;
+}
+
+.float{
+position:fixed;
+bottom:40px;
+right:40px;
+height: 75px;
+width: 75px;
+border-radius: 50%;
+border-color: transparent;
+font-size: 20px;
+padding-top: 10px;
+text-align: center;
+border-width: 0;
+box-shadow: 2px 2px 3px #999;
+font-family: 'helvetica neue';
+mix-blend-mode: darken;
 }

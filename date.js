@@ -1,4 +1,3 @@
-//jshint esversion:6
 
 exports.getDate = function() {
 
