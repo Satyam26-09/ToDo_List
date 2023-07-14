@@ -8,6 +8,8 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
+const findOrCreate = require("mongoose-findorcreate");
 
 const app = express();
 
@@ -73,6 +75,24 @@ passport.deserializeUser(function(user, cb) {
         return cb(null, user);
     });
 });
+
+passport.use(new GoogleStrategy({
+  clientID: process.env.GOOGLE_CLIENT_ID,
+  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+  callbackURL: determineCallbackURL(),
+  userProfileURL: 'https://www.googleapis.com/oauth2/v3/userinfo'
+},
+function(accessToken, refreshToken, profile, cb) {
+  User.findOrCreate({ googleId: profile.id }, function (err, user) {
+    return cb(err, user);
+  });
+}
+));
+
+function determineCallbackURL() {
+  var currentDomain = process.env.NODE_ENV === 'production' ? 'https://todo-list-qinf.onrender.com' : 'http://localhost:3000';
+  return currentDomain + '/auth/google/todo-list';
+}
 
 app.get("/",function(req,res){
   res.render("home");
@@ -263,6 +283,6 @@ app.post("/delete", function(req,res){
       res.redirect("/login");
 });
 
-app.listen(3000, function() {
+app.listen(process.env.PORT || 3000, function() {
   console.log("Server started on port 3000");
 });
