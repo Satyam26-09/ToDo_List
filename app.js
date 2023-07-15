@@ -47,6 +47,7 @@ const userSchema = new mongoose.Schema({
 });
 
 userSchema.plugin(passportLocalMongoose);
+userSchema.plugin(findOrCreate);
 
 const User = mongoose.model("User",userSchema);
 const Item = mongoose.model("Item",itemsSchema);
